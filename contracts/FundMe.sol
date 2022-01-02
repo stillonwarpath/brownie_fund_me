@@ -40,16 +40,24 @@ contract FundMe {
         // Wei has 18 decimals, we multiply answer by 10000000000
     }
 
-    // 1000000000000000000
     function getConversionRate(uint256 ethAmount)
         public
         view
         returns (uint256)
     {
         uint256 ethPrice = getPrice();
-        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 10000000000;
+        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
         return ethAmountInUsd;
         //3,802.444636570000000000
+        //0.00000000250000000
+    }
+
+    function getEntranceFee() public view returns (uint256) {
+        // minimumUSD
+        uint256 minimumUSD = 50 * 10**18;
+        uint256 price = getPrice();
+        uint256 precision = 1 * 10**18;
+        return (minimumUSD * precision) / price;
     }
 
     modifier onlyOwner() {
