@@ -18,8 +18,8 @@ def deploy_fund_me():
         print("Deploying Mocks...")
         if len(MockV3Aggregator) <= 0:
             MockV3Aggregator.deploy(18, web3.toWei(2000, "ether"), {"from": account})
-        price_feed_address = MockV3Aggregator[-1].address
         print("Mocks Deployed!")
+        price_feed_address = MockV3Aggregator[-1].address
 
     fund_me = FundMe.deploy(
         price_feed_address,
